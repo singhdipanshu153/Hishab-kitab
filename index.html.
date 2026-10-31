@@ -1,1 +1,157 @@
 
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#146b52">
+  <title>Paisa Diary</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f7f5;
+      color: #18352b;
+    }
+    header {
+      background: #146b52;
+      color: white;
+      padding: 22px 18px;
+      border-radius: 0 0 22px 22px;
+    }
+    header h2 { margin: 0 0 5px; }
+    header p { margin: 0; opacity: .85; }
+    main { padding: 18px; padding-bottom: 90px; }
+    .card {
+      background: white;
+      padding: 18px;
+      border-radius: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 3px 12px #0000000a;
+    }
+    .balance {
+      background: #146b52;
+      color: white;
+    }
+    .balance h1 { margin: 8px 0; font-size: 32px; }
+    .muted { color: #728078; font-size: 14px; }
+    .balance .muted { color: #d6e9e1; }
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .stats .card { margin: 0; }
+    .stats h3 { margin: 8px 0 0; }
+    nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-around;
+      background: white;
+      padding: 10px 3px;
+      box-shadow: 0 -3px 15px #00000012;
+    }
+    nav button {
+      border: 0;
+      background: transparent;
+      color: #68776f;
+      font-size: 12px;
+      padding: 7px 5px;
+      cursor: pointer;
+    }
+    nav button.active { color: #146b52; font-weight: bold; }
+    .page { display: none; }
+    .page.active { display: block; }
+    .placeholder {
+      text-align: center;
+      padding: 35px 15px;
+    }
+    .placeholder .emoji { font-size: 38px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h2>💰 Paisa Diary</h2>
+  <p>Apne paise ka hisaab, aasani se.</p>
+</header>
+
+<main>
+  <section id="home" class="page active">
+    <div class="card balance">
+      <div class="muted">Available Balance</div>
+      <h1>₹0.00</h1>
+      <div class="muted">Tumhara total balance</div>
+    </div>
+
+    <div class="stats">
+      <div class="card">
+        <div class="muted">Income</div>
+        <h3>₹0</h3>
+      </div>
+      <div class="card">
+        <div class="muted">Expense</div>
+        <h3>₹0</h3>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h3>Welcome to Paisa Diary 👋</h3>
+      <p class="muted">Yahan tum apni income, expenses aur udhaar ka hisaab rakh sakoge.</p>
+    </div>
+  </section>
+
+  <section id="history" class="page">
+    <div class="card placeholder">
+      <div class="emoji">📒</div>
+      <h3>Transaction History</h3>
+      <p class="muted">Tumhare transactions yahan dikhenge.</p>
+    </div>
+  </section>
+
+  <section id="udhaar" class="page">
+    <div class="card placeholder">
+      <div class="emoji">🤝</div>
+      <h3>Udhaar Tracker</h3>
+      <p class="muted">Kis se paise lene hain aur kisko dene hain, yahan manage hoga.</p>
+    </div>
+  </section>
+
+  <section id="reports" class="page">
+    <div class="card placeholder">
+      <div class="emoji">📊</div>
+      <h3>Reports</h3>
+      <p class="muted">Tumhare kharchon ki reports yahan dikhegi.</p>
+    </div>
+  </section>
+</main>
+
+<nav>
+  <button class="active" onclick="showPage('home',this)">🏠<br>Home</button>
+  <button onclick="showPage('history',this)">📒<br>History</button>
+  <button onclick="showPage('udhaar',this)">🤝<br>Udhaar</button>
+  <button onclick="showPage('reports',this)">📊<br>Reports</button>
+</nav>
+
+<script>
+function showPage(pageId, button) {
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.remove('active');
+  });
+
+  document.getElementById(pageId).classList.add('active');
+
+  document.querySelectorAll('nav button').forEach(btn => {
+    btn.classList.remove('active');
+  });
+
+  button.classList.add('active');
+}
+</script>
+
+</body>
+</html>
