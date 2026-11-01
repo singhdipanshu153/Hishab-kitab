@@ -1,78 +1,107 @@
-
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#146b52">
-  <title>Paisa Diary</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f3f7f5;
-      color: #18352b;
-    }
-    header {
-      background: #146b52;
-      color: white;
-      padding: 22px 18px;
-      border-radius: 0 0 22px 22px;
-    }
-    header h2 { margin: 0 0 5px; }
-    header p { margin: 0; opacity: .85; }
-    main { padding: 18px; padding-bottom: 90px; }
-    .card {
-      background: white;
-      padding: 18px;
-      border-radius: 16px;
-      margin-bottom: 14px;
-      box-shadow: 0 3px 12px #0000000a;
-    }
-    .balance {
-      background: #146b52;
-      color: white;
-    }
-    .balance h1 { margin: 8px 0; font-size: 32px; }
-    .muted { color: #728078; font-size: 14px; }
-    .balance .muted { color: #d6e9e1; }
-    .stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    .stats .card { margin: 0; }
-    .stats h3 { margin: 8px 0 0; }
-    nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: space-around;
-      background: white;
-      padding: 10px 3px;
-      box-shadow: 0 -3px 15px #00000012;
-    }
-    nav button {
-      border: 0;
-      background: transparent;
-      color: #68776f;
-      font-size: 12px;
-      padding: 7px 5px;
-      cursor: pointer;
-    }
-    nav button.active { color: #146b52; font-weight: bold; }
-    .page { display: none; }
-    .page.active { display: block; }
-    .placeholder {
-      text-align: center;
-      padding: 35px 15px;
-    }
-    .placeholder .emoji { font-size: 38px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#146b52">
+<title>Paisa Diary</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f3f7f5;
+  color: #18352b;
+}
+
+header {
+  background: #146b52;
+  color: white;
+  padding: 20px;
+  border-radius: 0 0 20px 20px;
+}
+
+header h2 { margin: 0 0 5px; }
+
+main {
+  padding: 16px;
+  padding-bottom: 90px;
+}
+
+.card {
+  background: white;
+  padding: 18px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.page { display: none; }
+.page.active { display: block; }
+
+label {
+  display: block;
+  margin: 14px 0 6px;
+  font-weight: bold;
+}
+
+input, select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ccd9d2;
+  border-radius: 9px;
+  font-size: 16px;
+  background: white;
+}
+
+button {
+  cursor: pointer;
+}
+
+.primary {
+  width: 100%;
+  padding: 14px;
+  background: #146b52;
+  color: white;
+  border: 0;
+  border-radius: 10px;
+  font-size: 16px;
+  margin-top: 18px;
+}
+
+nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 2px;
+  box-shadow: 0 -3px 12px #00000015;
+}
+
+nav button {
+  border: 0;
+  background: transparent;
+  color: #65756d;
+  font-size: 11px;
+  padding: 5px 2px;
+}
+
+nav button.active {
+  color: #146b52;
+  font-weight: bold;
+}
+
+#message {
+  margin-top: 14px;
+  font-weight: bold;
+  color: #146b52;
+}
+</style>
 </head>
+
 <body>
 
 <header>
@@ -81,76 +110,206 @@
 </header>
 
 <main>
-  <section id="home" class="page active">
-    <div class="card balance">
-      <div class="muted">Available Balance</div>
-      <h1>₹0.00</h1>
-      <div class="muted">Tumhara total balance</div>
-    </div>
 
-    <div class="stats">
-      <div class="card">
-        <div class="muted">Income</div>
-        <h3>₹0</h3>
-      </div>
-      <div class="card">
-        <div class="muted">Expense</div>
-        <h3>₹0</h3>
-      </div>
-    </div>
+<section id="home" class="page active">
+  <div class="card">
+    <h3>Welcome 👋</h3>
+    <p>Apni income aur expenses ka hisaab rakho.</p>
+    <button class="primary" onclick="showPage('add')">
+      + Add Transaction
+    </button>
+  </div>
+</section>
 
-    <div class="card" style="margin-top:14px">
-      <h3>Welcome to Paisa Diary 👋</h3>
-      <p class="muted">Yahan tum apni income, expenses aur udhaar ka hisaab rakh sakoge.</p>
-    </div>
-  </section>
+<section id="add" class="page">
+  <div class="card">
+    <h3>➕ Add Transaction</h3>
 
-  <section id="history" class="page">
-    <div class="card placeholder">
-      <div class="emoji">📒</div>
-      <h3>Transaction History</h3>
-      <p class="muted">Tumhare transactions yahan dikhenge.</p>
-    </div>
-  </section>
+    <form id="transactionForm">
 
-  <section id="udhaar" class="page">
-    <div class="card placeholder">
-      <div class="emoji">🤝</div>
-      <h3>Udhaar Tracker</h3>
-      <p class="muted">Kis se paise lene hain aur kisko dene hain, yahan manage hoga.</p>
-    </div>
-  </section>
+      <label>Transaction Type</label>
+      <select id="type" required>
+        <option value="expense">Expense (Kharcha)</option>
+        <option value="income">Income (Aamdani)</option>
+      </select>
 
-  <section id="reports" class="page">
-    <div class="card placeholder">
-      <div class="emoji">📊</div>
-      <h3>Reports</h3>
-      <p class="muted">Tumhare kharchon ki reports yahan dikhegi.</p>
-    </div>
-  </section>
+      <label>Amount (₹)</label>
+      <input
+        id="amount"
+        type="number"
+        min="0.01"
+        step="0.01"
+        placeholder="Example: 500"
+        required
+      >
+
+      <label>Category</label>
+      <select id="category" required>
+        <option value="Food">Food</option>
+        <option value="Travel">Travel</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Recharge">Recharge</option>
+        <option value="Salary">Salary</option>
+        <option value="Business">Business</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label>Date</label>
+      <input id="date" type="date" required>
+
+      <label>Note (Optional)</label>
+      <input
+        id="note"
+        type="text"
+        maxlength="80"
+        placeholder="Example: Lunch"
+      >
+
+      <button class="primary" type="submit">
+        Save Transaction
+      </button>
+
+      <p id="message" role="status" aria-live="polite"></p>
+
+    </form>
+  </div>
+</section>
+
+<section id="history" class="page">
+  <div class="card">
+    <h3>📒 History</h3>
+    <p>Day 3 mein transaction history banayenge.</p>
+  </div>
+</section>
+
+<section id="udhaar" class="page">
+  <div class="card">
+    <h3>🤝 Udhaar</h3>
+    <p>Udhaar tracker jald aayega.</p>
+  </div>
+</section>
+
+<section id="reports" class="page">
+  <div class="card">
+    <h3>📊 Reports</h3>
+    <p>Reports jald aayengi.</p>
+  </div>
+</section>
+
 </main>
 
 <nav>
-  <button class="active" onclick="showPage('home',this)">🏠<br>Home</button>
-  <button onclick="showPage('history',this)">📒<br>History</button>
-  <button onclick="showPage('udhaar',this)">🤝<br>Udhaar</button>
-  <button onclick="showPage('reports',this)">📊<br>Reports</button>
+  <button class="active" data-page="home"
+    onclick="showPage('home')">🏠<br>Home</button>
+
+  <button data-page="add"
+    onclick="showPage('add')">➕<br>Add</button>
+
+  <button data-page="history"
+    onclick="showPage('history')">📒<br>History</button>
+
+  <button data-page="udhaar"
+    onclick="showPage('udhaar')">🤝<br>Udhaar</button>
+
+  <button data-page="reports"
+    onclick="showPage('reports')">📊<br>Reports</button>
 </nav>
 
 <script>
-function showPage(pageId, button) {
+function showPage(pageId) {
   document.querySelectorAll('.page').forEach(page => {
     page.classList.remove('active');
   });
 
   document.getElementById(pageId).classList.add('active');
 
-  document.querySelectorAll('nav button').forEach(btn => {
-    btn.classList.remove('active');
+  document.querySelectorAll('nav button').forEach(button => {
+    button.classList.remove('active');
   });
 
-  button.classList.add('active');
+  const activeButton =
+    document.querySelector('[data-page="' + pageId + '"]');
+
+  if (activeButton) activeButton.classList.add('active');
 }
+
+// Aaj ki local date
+function getLocalDate() {
+  const now = new Date();
+  now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+  return now.toISOString().slice(0, 10);
+}
+
+const dateInput = document.getElementById('date');
+dateInput.value = getLocalDate();
+
+// Transaction save
+document.getElementById('transactionForm')
+.addEventListener('submit', function(event) {
+
+  event.preventDefault();
+
+  const amount = Number(
+    document.getElementById('amount').value
+  );
+
+  const message = document.getElementById('message');
+
+  if (!Number.isFinite(amount) || amount <= 0) {
+    message.textContent = 'Sahi amount enter karo.';
+    return;
+  }
+
+  let transactions = [];
+
+  try {
+    const saved = localStorage.getItem(
+      'paisaDiaryTransactions'
+    );
+
+    transactions = saved ? JSON.parse(saved) : [];
+
+    if (!Array.isArray(transactions)) {
+      throw new Error('Invalid data');
+    }
+  } catch (error) {
+    message.textContent = 'Saved data read nahi ho pa raha.';
+    return;
+  }
+
+  const transaction = {
+    id: Date.now().toString(),
+    type: document.getElementById('type').value,
+    amount: amount,
+    category: document.getElementById('category').value,
+    date: document.getElementById('date').value,
+    note: document.getElementById('note').value.trim()
+  };
+
+  if (!transaction.date) {
+    message.textContent = 'Date select karo.';
+    return;
+  }
+
+  transactions.push(transaction);
+
+  try {
+    localStorage.setItem(
+      'paisaDiaryTransactions',
+      JSON.stringify(transactions)
+    );
+
+    message.textContent =
+      '✅ Saved! Total entries: ' + transactions.length;
+
+    this.reset();
+    dateInput.value = getLocalDate();
+
+  } catch (error) {
+    message.textContent =
+      'Save nahi hua. Phone storage check karo.';
+  }
+});
 </script>
 
 </body>
